@@ -69,7 +69,7 @@ st.subheader('Monthly Expenses Summary Plot')
 
 # Monthly Expenses - Summary plot
 table = pd.pivot_table(data = data_filtered, index = ['Month'], columns = 'Category', values = 'Amount',
-                       aggfunc=np.sum, margins = True)
+                       aggfunc=np.sum, margins = True, fill_value = 0)
 
 table_new = table.reset_index()
 table_new = table_new.iloc[:-1,]
@@ -82,4 +82,6 @@ st.plotly_chart(fig, use_container_width=True)
 # Show Categorywise Expenses as a table
 if show_table:
     st.subheader('Monthly Expenses Summary Table')
+    cols = [table.columns[-1]] + [col for col in table if col != table.columns[-1]]
+    table = table[cols]
     st.write(table)
