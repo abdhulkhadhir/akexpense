@@ -53,10 +53,10 @@ if show_trans:
         mask1 = data['Description'].str.contains(text, case=False, na=False)
         mask2 = data['Remarks'].str.contains(text, case=False, na=False)
         data_search = data[mask1 | mask2]
-        st.write(data_search)
+        st.dataframe(data_search)
     
     else:
-        st.write(data)
+        st.dataframe(data)
         
 # Select Occasion
 
@@ -86,4 +86,4 @@ if show_table:
     cols = [table.columns[-1]] + [col for col in table if col != table.columns[-1]]
     table = table[cols]
     table = table.round(decimals =2)
-    st.write(table)
+    st.dataframe(table)
