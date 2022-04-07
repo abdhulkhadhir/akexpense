@@ -22,6 +22,7 @@ data_load_state = st.text('Loading data...')
 
 data = pd.read_excel(link,'Transactions', engine='openpyxl')
 data['Month'] = data['Date'].dt.strftime('%b-%Y')
+data = data.fillna(0)
 
 data_load_state.text("Loading data -DONE!")
 
@@ -51,11 +52,11 @@ if show_trans:
     if search:
         mask1 = data['Description'].str.contains(text, case=False, na=False)
         mask2 = data['Remarks'].str.contains(text, case=False, na=False)
-        data_search = data[mask1 | mask2]
+        data_search = data[mask1 | mask2].round(decimals =2)
         st.write(data_search)
     
     else:
-        st.write(data)
+        st.write(data.round(decimals =2))
         
 # Select Occasion
 
@@ -83,5 +84,6 @@ st.plotly_chart(fig, use_container_width=True)
 if show_table:
     st.subheader('Monthly Expenses Summary Table')
     cols = [table.columns[-1]] + [col for col in table if col != table.columns[-1]]
-    table = table[cols]
+    table = (table[cols]).round(decimals =2)
+
     st.write(table)
