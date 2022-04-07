@@ -17,7 +17,6 @@ st.title('AKespense Tracker')
 link = 'https://api.onedrive.com/v1.0/shares/u!aHR0cHM6Ly8xZHJ2Lm1zL3gvcyFBdWZ6bnAweHVfSG5nZlpGaXg4OFZ5azdvMFlZcnc_ZT10WnBwRDA/root/content'
 
 
-
 # Create a text element and let the reader know the data is loading.
 data_load_state = st.text('Loading data...')
 
@@ -71,9 +70,10 @@ st.subheader('Monthly Expenses Summary Plot')
 # Monthly Expenses - Summary plot
 table = pd.pivot_table(data = data_filtered, index = ['Month'], columns = 'Category', values = 'Amount',
                        aggfunc=np.sum, margins = True)
-table_new = table.reset_index()
-table_new['Month'] = pd.to_datetime(table_new['Month'])
 
+table_new = table.reset_index()
+table_new = table_new.iloc[:-1,]
+table_new['Month'] = pd.to_datetime(table_new['Month'])
 
 fig = px.bar(table_new, x= 'Month', y=list(table_new.columns))
 
@@ -82,4 +82,4 @@ st.plotly_chart(fig, use_container_width=True)
 # Show Categorywise Expenses as a table
 if show_table:
     st.subheader('Monthly Expenses Summary Table')
-    st.write(table['Amount'])
+    st.write(table)
