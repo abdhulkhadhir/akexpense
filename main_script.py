@@ -8,7 +8,6 @@ Created on Thu Apr  7 09:30:28 2022
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 import plotly.express as px
 plt.style.use('ggplot')
 
