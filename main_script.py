@@ -23,9 +23,9 @@ data_load_state = st.text('Loading data...')
 data = pd.read_excel(link,'Transactions', engine='openpyxl')
 data['Month'] = data['Date'].dt.strftime('%b-%Y')
 data['Amount'] = data['Amount'].fillna(0)
-data['Sub-Category'] = data['Sub-Category'].fillna(0)
-data['Remarks'] = data['Remarks'].fillna(0)
-data['City'] = data['City'].fillna(0)
+data['Sub-Category'] = data['Sub-Category'].fillna('')
+data['Remarks'] = data['Remarks'].fillna('')
+data['City'] = data['City'].fillna('')
 
 data_load_state.text("Loading data -DONE!")
 
