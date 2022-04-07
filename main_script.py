@@ -22,7 +22,7 @@ data_load_state = st.text('Loading data...')
 
 data = pd.read_excel(link,'Transactions', engine='openpyxl')
 data['Month'] = data['Date'].dt.strftime('%b-%Y')
-
+data = data.fillna(0)
 
 data_load_state.text("Loading data -DONE!")
 
