@@ -69,7 +69,8 @@ else:
 st.subheader('Monthly Expenses Summary Plot')
 
 # Monthly Expenses - Summary plot
-table = pd.pivot_table(data = data_filtered, index = ['Month'], columns = 'Category', aggfunc={'Amount':np.sum}, margins = True, fill_value = 0)
+table = pd.pivot_table(data = data_filtered, index = ['Month'], columns = 'Category', values = 'Amount',
+                       aggfunc=np.sum, margins = True)
 table_new = table['Amount'].reset_index()
 table_new['Month'] = pd.to_datetime(table_new['Month'])
 
